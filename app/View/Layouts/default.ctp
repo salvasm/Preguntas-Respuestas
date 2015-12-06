@@ -48,7 +48,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div class="header">
 			<!--TITULO-->
 			<div class="titulo">
-				<a href="index.html">
+				<a href="<?php $this->Html->link(array('controller' => 'questions', 'action' => 'index')); ?>">
 					<h1>PREGUNTAS&RESPUESTAS </h1>
 				</a>
 			</div>
@@ -60,6 +60,11 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 		<!--MENU-->
 		<div class="menu">
+		
+			<?php $session_id = $this->Session->read('User.id'); 
+			$session_name = $this->Session->read('User.name'); 
+			?>
+			<?php if(!$session_id) { ?>
 			<ul>
 				<li>
 					<?php echo $this->Html->link(
@@ -76,6 +81,25 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 						); ?>
 				</li>
 			</ul>
+			<?php } else { ?>
+				<ul>
+					<li>
+						<?php echo $this->Html->link(
+							'Logout',
+							'/users/logout',
+							array('class' => 'boton_der')
+						); ?>
+					</li>
+					<li>
+							<?php echo $this->Html->link(
+								'Inicio',
+								'/questions/index',
+								array('class' => 'boton')
+							); ?>
+					</li>
+					<span class="data_user">Bienvenido <?php echo $session_name; ?></span>
+				</ul>
+			<?php } ?>
 		</div>
 
 

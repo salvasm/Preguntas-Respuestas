@@ -4,7 +4,8 @@ App::uses('AppController', 'Controller');
 
 class UsersController extends AppController {
 
-
+	public $components = array('Flash', 'Session');
+	
 	public function beforeFilter() {
 		parent::beforeFilter();
 		// Allow users to register and logout.
@@ -12,8 +13,25 @@ class UsersController extends AppController {
 	}
 	
 	public function login() {
+		AuthComponent::user('id');
+		AuthComponent::user('username');
+		
 		if ($this->request->is('post')) {
+			
 			if ($this->Auth->login()) {
+				//$login = $this->User->findByUsername($this->request->data['User']['username']);
+				
+				//Setting Session Variables:
+				//$this -> Session -> write( "name", $login);
+
+				//Retrieving Session Variables:
+				//echo $this -> Session -> read("name");
+				
+				
+				// From inside a controller
+				$this->Session->write('User.id', $this->Auth->user('id'));
+				$this->Session->write('User.name', $this->Auth->user('username'));
+				
 				return $this->redirect($this->Auth->redirectUrl());
 			}
 			$this->Flash->error(__('Invalid username or password, try again'));
@@ -21,7 +39,8 @@ class UsersController extends AppController {
 	}
 
 	public function logout() {
-		return $this->redirect($this->Auth->logout());
+		$this->Session->destroy();
+        $this->redirect(array('controller' => 'questions', 'action' => 'index'));
 	}
 
 

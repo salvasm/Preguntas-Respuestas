@@ -33,6 +33,14 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 // app/Controller/AppController.php
 
+function beforeFilter() {
+    $locale = Configure::read('Config.language');
+    if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {
+        // e.g. use /app/views/fre/pages/tos.ctp instead of /app/views/pages/tos.ctp
+        $this->viewPath = $locale . DS . $this->viewPath;
+    }
+}
+
 public $components = array(
     'Flash',
     'Auth' => array(

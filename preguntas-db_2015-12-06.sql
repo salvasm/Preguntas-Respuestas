@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 05, 2015 at 12:15 PM
+-- Generation Time: Dec 06, 2015 at 02:26 AM
 -- Server version: 5.5.46
 -- PHP Version: 5.4.45
 
@@ -34,7 +34,7 @@ CREATE TABLE `answers` (
   `dislikes` int(11) NOT NULL,
   `id_user` int(11) NOT NULL,
   `id_question` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `answers`
@@ -42,8 +42,10 @@ CREATE TABLE `answers` (
 
 INSERT INTO `answers` (`id`, `body`, `date`, `likes`, `dislikes`, `id_user`, `id_question`) VALUES
 (1, 'Pues deberías ir porque va salva y es buen chaval', '2015-12-01 23:00:00', 5, 2, 1, 1),
-(2, 'sadasd2', '2015-12-01 23:00:00', 5, 2, 1, 2),
-(3, '3', '2015-12-01 23:00:00', 5, 2, 1, 2);
+(2, 'sadasd2', '2015-12-05 18:15:45', 5, 2, 2, 2),
+(3, '3', '2015-12-01 23:00:00', 5, 2, 1, 2),
+(4, 'Pues deberías ir porque va salva y es buen chaval', '2015-12-05 17:24:47', 5, 2, 1, 1),
+(5, 'Pues deberías ir porque va salva y es buen chaval', '2015-12-05 17:24:47', 5, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -55,22 +57,29 @@ CREATE TABLE `questions` (
   `id` int(11) NOT NULL,
   `title` varchar(80) NOT NULL,
   `body` text NOT NULL,
-  `created` date NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modify` date DEFAULT NULL,
   `id_user` int(11) NOT NULL,
   `id_tag` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `questions`
 --
 
 INSERT INTO `questions` (`id`, `title`, `body`, `created`, `modify`, `id_user`, `id_tag`) VALUES
-(1, 'Holis', 'holis', '2015-12-03', NULL, 3, 0),
-(2, 'Hasdjbasdjb', 'asijdbaskdna', '2015-12-03', NULL, 3, 0),
-(3, 'ss', 'ss', '2015-12-03', NULL, 2, 0),
-(4, 'ASDDAS', 'ASDASDASD', '2015-12-03', NULL, 1, 0),
-(5, 'Prueba?', 'Es verdad', '2015-12-04', NULL, 2, 0);
+(1, 'Holis', 'holis', '2015-12-02 23:00:00', NULL, 3, 0),
+(2, 'Hasdjbasdjb', 'asijdbaskdna', '2015-12-02 23:00:00', NULL, 3, 0),
+(3, 'ss', 'ss', '2015-12-02 23:00:00', NULL, 2, 0),
+(4, 'ASDDAS', 'ASDASDASD', '2015-12-02 23:00:00', NULL, 1, 0),
+(5, 'Prueba?', 'Es verdad', '2015-12-03 23:00:00', NULL, 2, 0),
+(6, 'Esta es mi pregunta', 'Holis que tal', '2015-12-04 23:00:00', NULL, 4, 0),
+(7, 'asdasdasd', 'fgfgfg', '2015-12-04 23:00:00', NULL, 4, 0),
+(8, 'Mi preguntica', 'Holis chochis\r\n', '2015-12-04 23:00:00', NULL, 2, 0),
+(9, 'Hoy follas', 'hoy follas', '2015-12-04 23:00:00', NULL, 2, 0),
+(10, 'jijiji', 'jijiji', '2015-12-05 22:59:38', NULL, 2, 0),
+(11, 'asdasdad', 'sadasd', '2015-12-05 23:36:58', NULL, 2, 0),
+(12, 'Ejemplo numero mil!!!?', 'Pues mi pregunta es que... blablabla\r\n\r\nsadasdasd', '2015-12-05 23:47:09', NULL, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -161,12 +170,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `tags`
 --

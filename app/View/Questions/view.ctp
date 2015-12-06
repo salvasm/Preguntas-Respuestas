@@ -35,6 +35,7 @@
 				echo $this->Form->input('body', array('rows' => '3'));
 				echo $this->Form->input('id_question');
 				echo $this->Form->end('Save Answer');
+				print_r ($answer[0]);
 				?>
 				
 			</div>

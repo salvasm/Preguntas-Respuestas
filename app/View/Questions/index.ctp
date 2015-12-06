@@ -2,12 +2,13 @@
 
 <!-- Here's where we loop through our $questions array, printing out question info -->
 		<!--CONTENT-->
+		
 		<div class="content">
 			<div class="left">
 				<div class="box" id="questions">
-					<h2>Últimas preguntas</h2>
+					<h2> <?php echo __('Ultimas preguntas'); ?> </h2>
 					<ul>
-						<?php foreach ($questions as $question): ?>
+						<?php foreach ($joinQuestionsAnswers as $question): ?>
 						<li>           
 							   <?php
 									echo $this->Html->link(
@@ -17,7 +18,7 @@
 								?>
 						</li>
 
-						<!--
+						<!-- OPCIONAL SOLO PARA TUS QUESTIONS -- Hay que verlo
 								<?php
 									echo $this->Form->postLink(
 										'Delete',
@@ -31,51 +32,57 @@
 									);
 								?>
 						-->
-						<div class="details">
-								<?php echo $question['Question']['created']; ?>
+
+						<div class="details" title="<?php echo date('g:ia', strtotime($question['Question']['created'])); ?>">
+								<?php echo "<span>" . date('j/m/Y', strtotime($question['Question']['created'])) . "</span>" .
+									$this->Html->link($question[0]['num_comments'] . " comentario/s" ,
+									array(
+										'controller' => 'questions',
+										'action' => 'view/' . $question['Question']['id'] . "#answers")
+									);
+									
+									
+								?>
 						</div>
 								<?php endforeach; ?>
-									</ul>
+					</ul>
 				</div>
 
 				<div class="box" id="answers">
 					<h2>Últimas respuestas</h2>
 					<ul>
-						<li>Sí, puede ser...</li>
-						<li>Sí, puede ser...</li>
-						<li>Sí, puede ser...</li>
-						<li>Sí, puede ser...</li>
-						<li>Sí, puede ser...</li>
+					<?php foreach ($recentAnswer as $answers): ?>
+						<li><?php echo $this->Html->link(substr($answers['Answer']['body'], 0, 60) . " ...",
+										array('action' => 'view', $answers['Answer']['id_question']));?></li>
+					<?php endforeach; ?>
+
 					</ul>
 				</div>
 			</div>
 
 			<div class="right">
+			<?php $session_id = $this->Session->read('User.id'); 
+			$session_name = $this->Session->read('User.name'); 
+			?>
+				<?php if($session_name) { ?>
 				<div class="box preguntaya">
 					<h2>¡Envía tu pregunta!</h2>
-					<form action="#">
-						<input type="text" name="name" value="" id="preguntaya" placeholder="Escribe tu pregunta..." />
-						<input type="submit" name="name" id="button_preguntaya" value="Enviar pregunta" />
-					</form>
+					<?php
+					echo $this->Form->create('Question');
+					echo $this->Form->input('title', array('id' => 'preguntaya', 'placeholder'=>'¿Cuál es el título de tu pregunta?'));
+					echo $this->Form->input('body', array('id' => 'preguntaya', 'placeholder'=>'Escríbela detalladamente...', 'rows' => '2'));
+					echo $this->Form->end(array('label' => 'Enviar pregunta','id' => 'button_preguntaya'));
+					?>
 				</div>
+				<?php } ?>
 				<div class="box" id="users">
 					<h2>Usuarios más activos</h2>
 					<ol>
-						<li>Usuario
-							<span class="user_responses">6</span>
-						</li>
-						<li>Felipa
-							<span class="user_responses">5</span>
-						</li>
-						<li>Administrador
-							<span class="user_responses">3</span>
-						</li>
-						<li>Jose
-							<span class="user_responses">3</span>
-						</li>
-						<li>Pepe
-							<span class="user_responses">1</span>
-						</li>
+						<?php foreach ($join as $mostActives): ?>
+							<li><?php echo $mostActives['User']['username'];?>
+								<span class="user_responses"><?php echo $mostActives[0]['num_comments']; ?></span>				
+							</li>
+						<?php endforeach; ?>
 					</ol>
 				</div>
 			</div>
