@@ -8,6 +8,7 @@
 				<div class="box" id="questions">
 					<h2> <?php echo __('Ultimas preguntas'); ?> </h2>
 					<ul>
+
 						<?php foreach ($joinQuestionsAnswers as $question): ?>
 						<li>           
 							   <?php
@@ -49,7 +50,7 @@
 				</div>
 
 				<div class="box" id="answers">
-					<h2>Últimas respuestas</h2>
+					<h2><?php echo __('Últimas respuestas')?></h2>
 					<ul>
 					<?php foreach ($recentAnswer as $answers): ?>
 						<li><?php echo $this->Html->link(substr($answers['Answer']['body'], 0, 60) . " ...",
@@ -66,17 +67,22 @@
 			?>
 				<?php if($session_name) { ?>
 				<div class="box preguntaya">
-					<h2>¡Envía tu pregunta!</h2>
+					<h2><?php echo __('¡Envía tu pregunta!')?></h2>
 					<?php
 					echo $this->Form->create('Question');
-					echo $this->Form->input('title', array('id' => 'preguntaya', 'placeholder'=>'¿Cuál es el título de tu pregunta?'));
-					echo $this->Form->input('body', array('id' => 'preguntaya', 'placeholder'=>'Escríbela detalladamente...', 'rows' => '2'));
-					echo $this->Form->end(array('label' => 'Enviar pregunta','id' => 'button_preguntaya'));
+					echo $this->Form->input('title', array('id' => 'preguntaya', 'placeholder'=> __('Escribe el título de tu pregunta')));
+					echo $this->Form->input('body', array('id' => 'preguntaya', 'placeholder'=> __('Escribe detalladamante el contenido de tu pregunta'), 'rows' => '2'));
+					echo $this->Form->input('category', array(
+										'options' => array('comedia'=>'comedia','accion' =>'accion','educación' =>'educación','cine' =>'cine','deportes' =>'deportes',
+										'política'=> 'política','sexo'=> 'sexo','anime' => 'anime','general' => 'general','ficción'=>'ficción','ciencias'=>'ciencias',
+										'viajes'=>'viajes'),
+										'empty' => __('Elige una'), 'id' => 'preguntaya'));
+					echo $this->Form->end(array('label' => __('Enviar pregunta'),'id' => 'button_preguntaya'));
 					?>
 				</div>
 				<?php } ?>
 				<div class="box" id="users">
-					<h2>Usuarios más activos</h2>
+					<h2><?php echo __('Usuarios más activos')?></h2>
 					<ol>
 						<?php foreach ($join as $mostActives): ?>
 							<li><?php echo $mostActives['User']['username'];?>

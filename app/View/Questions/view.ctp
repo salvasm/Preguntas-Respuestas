@@ -13,11 +13,11 @@
 						<?php 
 							echo $user[$id-1]['User']['username'];
 						?><br/>
-						<data><?php echo $question['Question']['created']; ?></data>
+						<data><?php echo date('j F Y', strtotime($question['Question']['created'])); ?><br/><?php echo date('g:i a', strtotime($question['Question']['created'])); ?></data>
 					</span>
 				</div>
 				<div class="question"><?php echo h($question['Question']['body']); ?></div>
-				<div class="question_tags"><span>Tag: <?php echo h($question['Question']['id_tag']); ?></span></div>
+				<div class="question_tags"><span>Category: <?php echo h($question['Question']['category']); ?></span></div>
 			</div>
 			
 			<div class="box" id="answers">
@@ -29,13 +29,10 @@
 				</form>
 				-->
 				
-				<h1>Add Question</h1>
 				<?php
-				echo $this->Form->create('Answers');
-				echo $this->Form->input('body', array('rows' => '3'));
-				echo $this->Form->input('id_question');
-				echo $this->Form->end('Save Answer');
-				print_r ($answer[0]);
+				echo $this->Form->create('Answer');
+				echo $this->Form->input('body', array('rows' => '3', 'id' => 'responder_comments', 'placeholder' => 'Escribe tu respuesta...'));				
+				echo $this->Form->end(array('label' => 'Enviar respuesta','id' => 'button'));
 				?>
 				
 			</div>
@@ -44,21 +41,23 @@
 
 			
 			<div class="box" id="answers">
-				<h2>Respuestas (<?php echo count($answer); ?>)</h2>
+				<h2>Respuestas (<?php echo count($answers); ?>)</h2>
 	
-				<?php if($answer) {  ?>
-					<ul id="comments">				
-						<?php foreach ($answer as $answers): ?>
+				
+	
+				<?php if($answers) {  ?>
+					<ul id="comments">					
+						<?php foreach ($answers as $answer): ?>
 							<li>
 								<div class="user_data_comments">
-									<img src="<?php echo $user[$id-2]['User']['avatar']; ?>" class="avatar_comments" />
+									<img src="<?php echo $user[$id]['User']['avatar']; ?>" class="avatar_comments" />
 									<span>
-										<?php echo $user[$id-2]['User']['username']; ?>
+										<?php echo $user[$id-1]['User']['username']; ?>
 									</span>
 								</div>
-								<div class="comment"><?php echo $answers['Answer']['body'];?>
-									<div class="comment_options">
-										<input type="button" name="Responder" id="button_response" value="Responder comentario" />
+								<div class="comment"><?php echo $answer['Answer']['body'];?>
+									<div class="comment_options">	
+									<?php echo $this->Html->link('Like', array('action'=>'like')); ?>									
 									</div>
 								</div>
 							</li>

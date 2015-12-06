@@ -1,6 +1,7 @@
 <?php
 // File: /app/Controller/PostsController.php
 class AnswersController extends AppController {
+	
     public $helpers = array('Html', 'Form', 'Flash');
     public $components = array('Flash');
 
@@ -12,6 +13,8 @@ class AnswersController extends AppController {
 		if ($this->request->is('post')) {
 			//Added this line
 			$this->request->data['Answer']['id_user'] = $this->Auth->user('id');
+			//$this->request->data['Answer']['body'] = $this->data['Answer']['body'];
+			$this->request->data['Answer']['id_question'] = 5;
 			
 			if ($this->Answer->save($this->request->data)) {
 				$this->Flash->success(__('Your answer has been saved.'));

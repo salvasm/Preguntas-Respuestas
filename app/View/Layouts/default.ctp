@@ -48,13 +48,18 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<div class="header">
 			<!--TITULO-->
 			<div class="titulo">
-				<a href="<?php $this->Html->link(array('controller' => 'questions', 'action' => 'index')); ?>">
-					<h1>PREGUNTAS&RESPUESTAS </h1>
-				</a>
+					<h1><?php echo __('PREGUNTAS&RESPUESTAS')?> </h1>
 			</div>
 			<!--BUSCADOR-->
 			<div class="search">
-				<input type="text" placeholder="Buscar..." />
+				<table>
+					<tr>
+						<td class="spanish"><?php echo $this->Html->link('español', array('action'=>'index','es')); ?></td>
+						<td class="english"><?php echo $this->Html->link('english', array('action'=>'index','en')); ?></td>
+						<td>    <input type="text" placeholder="<?php echo __('Buscar...')?>" /> </td>
+					</tr>
+				</table>
+				
 			</div>
 		</div>
 
@@ -92,12 +97,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					</li>
 					<li>
 							<?php echo $this->Html->link(
-								'Inicio',
+								 __('Inicio'),
 								'/questions/index',
 								array('class' => 'boton')
 							); ?>
 					</li>
-					<span class="data_user">Bienvenido <?php echo $session_name; ?></span>
+					<span class="data_user"><?php echo __('Bienvenido')?> <?php echo $session_name; ?></span>
 				</ul>
 			<?php } ?>
 		</div>
@@ -113,7 +118,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
 		<!--FOOTER-->
 		<div class="footer">
-			<p>Todos los derechos reservados | 2015</p>
+			<p><?php echo __('Todos los derechos reservados | 2015')?></p>
 		</div>
 		
 	</div>

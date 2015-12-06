@@ -4,6 +4,13 @@
 		<!--CONTENT-->
 		<div class="content">
 
+		<?php
+		
+		$session_id = $this->Session->read('User.id'); 
+		$session_name = $this->Session->read('User.name'); 
+		
+		if($session_name) { ?>
+		
 			<?php foreach ($answers as $answer): ?>
 				<li><?php echo $answer['Answer']['body']; ?></li>
 			<?php endforeach; ?>

@@ -1,6 +1,9 @@
 <?php
 class Question extends AppModel {
-    public $validate = array(
+    
+	public $name = 'Question';
+	
+	public $validate = array(
         'title' => array(
             'rule' => 'notBlank'
         ),

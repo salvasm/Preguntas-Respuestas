@@ -12,16 +12,22 @@ body {
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
 }
-input, textarea {
+input, textarea, select {
   padding: 8px 10px;
   font-family: 'Montserrat', sans-serif;
 }
+
+select {
+	text-transform: capitalize;
+}
+
 h1 {
   font-family: 'Amatic SC', cursive;
 }
 .wrap {
   margin: 0 auto;
   width: 960px;
+  height: 100%;
 }
 @media all and (max-width: 600px) {
   .wrap {
@@ -178,9 +184,10 @@ h1 {
 /* CONTENIDO -> INICIO */
 
 .content {
+  overflow: hidden;
   margin-bottom: 10px;
   min-height: 650px;
-  position: static;
+  position: relative;
 }
 .box {
   margin: 15px 0 15px;
@@ -190,7 +197,7 @@ h1 {
   border-radius: 5px;
   border: 1px solid;
   box-shadow: 2px 2px 8px #000000;
-  width: 100%;
+  width: 99%;
 }
 
 .box.preguntaya {
@@ -223,13 +230,14 @@ label {
 	display: none;
 }
 
-.box.preguntaya input, .box.preguntaya textarea  {
+.box.preguntaya input, .box.preguntaya textarea, select  {
   display: block;
   width: 90%;
   margin: 0 auto;
   margin-bottom: 10px;
   border: 1px solid #000;
 }
+
 .box h2 {
   padding: 5px 20px;
   margin: 0;
@@ -552,3 +560,25 @@ textarea #responder_comments {
 	background-color: #F2DEDE;
 }
 
+.english a, .spanish a {
+	text-decoration: none;
+	color: black;
+}
+
+.english, .spanish  {
+	text-transform: capitalize;
+	margin-right: 35px;
+	width: 16px;
+	height: 16px;
+	color: white;
+	background-image: url('../img/flags/United-Kingdom.png');
+	display: block;
+	padding-left: 45px;
+	font-size: 10px;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.spanish {
+	background-image: url('../img/flags/Spain.png');
+}

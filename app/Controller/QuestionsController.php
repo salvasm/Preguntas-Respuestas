@@ -2,21 +2,20 @@
 // File: /app/Controller/PostsController.php
 
 class QuestionsController extends AppController {
-		
 	
     public $helpers = array('Html', 'Form', 'Flash');
     public $components = array('Flash');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		// Allow users to register and logout.
+		// Allow all users to...
 		$this->Auth->allow('index');
 	}
 	
-    public function index() {
+    public function index($languaje = 'es') {
         $this->set('questions', $this->Question->find('all'));
 		// Idioma
-		Configure::write('Config.language', 'en');
+		Configure::write('Config.language', $languaje);
 		
 		// Load comentarios para pregunta según ID
 		$this->loadModel('Answer');
@@ -111,14 +110,15 @@ class QuestionsController extends AppController {
 		
 		// Load comentarios para pregunta según ID
 		$this->loadModel('Answer');
-		$answers = $this->Answer->findAllById_question($id);
-		$this->set('answer', $answers);
+		$answers = $this->Answer->findAllByIdQuestion($id);
+		$this->set('answers', $answers);
 
 		// Añadir answer
 		if ($this->request->is('post')) {
-			//Added this line
+			
 			$this->request->data['Answer']['id_user'] = $this->Auth->user('id');
-
+			$this->request->data['Answer']['id_question'] = $id;
+			
 			if ($this->Answer->save($this->request->data)) {
 				$this->Flash->success(__('Your answer has been saved.'));
 				return $this->redirect(array('controller' => 'questions', 'action' => 'index'));
@@ -126,7 +126,13 @@ class QuestionsController extends AppController {
 		}
 		
     }
+	
+	public function like($id){
+		
+	}
 
+	
+	
 	public function add() {
 		if ($this->request->is('post')) {
 			//Added this line

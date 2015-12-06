@@ -1,36 +1,152 @@
 # LANGUAGE translation of CakePHP Application
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"PO-Revision-Date: 2015-12-05 18:35+0100\n"
-"Language-Team: EMAIL@ADDRESS\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"POT-Creation-Date: \n"
-"X-Generator: Poedit 1.8.6\n"
-"Last-Translator: \n"
-"Language: en\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /index.ctp:10
+#: /Controller/AnswersController.php:17
+#: /Controller/QuestionsController.php:124
+msgid "Your answer has been saved."
+msgstr ""
+
+#: /Controller/AnswersController.php:25;30
+msgid "Invalid answer"
+msgstr ""
+
+#: /Controller/AnswersController.php:36
+msgid "Your answer has been updated."
+msgstr ""
+
+#: /Controller/AnswersController.php:39
+msgid "Unable to update your answer."
+msgstr ""
+
+#: /Controller/AnswersController.php:55
+#: /Controller/QuestionsController.php:174
+msgid "The question with id: %s has been deleted."
+msgstr ""
+
+#: /Controller/AnswersController.php:59
+#: /Controller/QuestionsController.php:178
+msgid "The question with id: %s could not be deleted."
+msgstr ""
+
+#: /Controller/QuestionsController.php:91;136
+msgid "Your question has been saved."
+msgstr ""
+
+#: /Controller/QuestionsController.php:99;104;144;149
+msgid "Invalid question"
+msgstr ""
+
+#: /Controller/QuestionsController.php:155
+msgid "Your question has been updated."
+msgstr ""
+
+#: /Controller/QuestionsController.php:158
+msgid "Unable to update your question."
+msgstr ""
+
+#: /Controller/UsersController.php:37
+msgid "Invalid username or password, try again"
+msgstr ""
+
+#: /Controller/UsersController.php:55;76;100
+msgid "Invalid user"
+msgstr ""
+
+#: /Controller/UsersController.php:64;80
+msgid "The user has been saved"
+msgstr ""
+
+#: /Controller/UsersController.php:68;84
+msgid "The user could not be saved. Please, try again."
+msgstr ""
+
+#: /Controller/UsersController.php:103
+msgid "User deleted"
+msgstr ""
+
+#: /Controller/UsersController.php:106
+msgid "User was not deleted"
+msgstr ""
+
+#: /View/Layouts/default.ctp:52
+msgid "PREGUNTAS&RESPUESTAS"
+msgstr "QUESTIONS&ANSWERS"
+
+
+#: /View/Layouts/default.ctp:61
+msgid "Buscar..."
+msgstr "Search..."
+
+#: /View/Layouts/default.ctp:102
+msgid "Inicio"
+msgstr "Home"
+
+#: /View/Layouts/default.ctp:107
+msgid "Bienvenido"
+msgstr "Welcome"
+
+#: /View/Layouts/default.ctp:123
+msgid "Todos los derechos reservados | 2015"
+msgstr "All rights reserved | 2015"
+
+#: /View/Questions/index.ctp:9
 msgid "Ultimas preguntas"
 msgstr "Last questions"
 
-#: /index.ctp:11
-msgid "LOLOLO"
-msgstr ""
+#: /View/Questions/index.ctp:53
+msgid "Últimas respuestas"
+msgstr "Last answers"
 
-#: /index.ctp:46
-msgid "Ultimas respuestas"
-msgstr "Last Answers"
-
-#: /index.ctp:59
+#: /View/Questions/index.ctp:70
 msgid "¡Envía tu pregunta!"
 msgstr "Send your question!"
 
-#: /index.ctp:66
+#: /View/Questions/index.ctp:73
+msgid "Escribe el título de tu pregunta"
+msgstr "Write here the title of your question"
+
+#: /View/Questions/index.ctp:74
+msgid "Escribe detalladamante el contenido de tu pregunta"
+msgstr "Write a description of your question"
+
+#: /View/Questions/index.ctp:75
+msgid "Enviar pregunta"
+msgstr "Send question"
+
+#: /View/Questions/index.ctp:80
 msgid "Usuarios más activos"
 msgstr "Most active users"
+
+#: /View/Users/add.ctp:5
+msgid "Add User"
+msgstr ""
+
+#: /View/Users/add.ctp:13
+msgid "Submit"
+msgstr ""
+
+#: /View/Users/login.ctp:8
+msgid "Please enter your username and password"
+msgstr ""
+
+#: /View/Users/login.ctp:14
+msgid "Login"
+msgstr ""
+
+#: /View/Errors/error400.ctp:19
+#: /View/Errors/error500.ctp:19
+msgid "Error"
+msgstr ""
+
