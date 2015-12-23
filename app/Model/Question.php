@@ -11,7 +11,16 @@ class Question extends AppModel {
             'rule' => 'notBlank'
         )
     );
-		
+
+	/* hasMany Pruebas */
+	public $hasMany = array (
+		'Answer'   =>  array(
+			'className' => 'Answer',
+			'foreignKey' => 'id_question',
+			'order' => 'date DESC'
+		),
+	);
+	
 	public function isOwnedBy($question, $user) {
 		return $this->field('id', array('id' => $question, 'id_user' => $user)) !== false;
 	}

@@ -2,15 +2,21 @@
 
 <!-- Here's where we loop through our $questions array, printing out question info -->
 		<!--CONTENT-->
+		<?php 
+			$session_lang = $this->Session->read('User.lang');
+			Configure::write('Config.language', $session_lang);
+		?>
 		
-		<div class="content">
+		<div class="content">			
 			<div class="left">
 				<div class="box" id="questions">
-					<h2> <?php echo __('Ultimas preguntas'); ?> </h2>
-					<ul>
-
-						<?php foreach ($joinQuestionsAnswers as $question): ?>
-						<li>           
+				
+					<h2> <?php echo __('Ultimas preguntas'); ?></h2>
+					<ul>		
+						
+						<?php foreach ($questions as $question): ?>
+						
+						<li>
 							   <?php
 									echo $this->Html->link(
 										$question['Question']['title'],
@@ -18,25 +24,10 @@
 									);
 								?>
 						</li>
-
-						<!-- OPCIONAL SOLO PARA TUS QUESTIONS -- Hay que verlo
-								<?php
-									echo $this->Form->postLink(
-										'Delete',
-										array('action' => 'delete', $question['Question']['id']),
-										array('confirm' => 'Are you sure?')
-									);
-								?>
-								<?php
-									echo $this->Html->link(
-										'Edit', array('action' => 'edit', $question['Question']['id'])
-									);
-								?>
-						-->
-
+	
 						<div class="details" title="<?php echo date('g:ia', strtotime($question['Question']['created'])); ?>">
 								<?php echo "<span>" . date('j/m/Y', strtotime($question['Question']['created'])) . "</span>" .
-									$this->Html->link($question[0]['num_comments'] . " comentario/s" ,
+									$this->Html->link(count($question['Answer']) . " comentario/s" ,
 									array(
 										'controller' => 'questions',
 										'action' => 'view/' . $question['Question']['id'] . "#answers")
@@ -45,27 +36,28 @@
 									
 								?>
 						</div>
-								<?php endforeach; ?>
+						<?php endforeach; ?>
+						<li class="background_button"><?php echo $this->Html->link("Ver todas las preguntas", array('controller' => 'answers'));?></li>
 					</ul>
 				</div>
 
 				<div class="box" id="answers">
 					<h2><?php echo __('Últimas respuestas')?></h2>
 					<ul>
-					<?php foreach ($recentAnswer as $answers): ?>
-						<li><?php echo $this->Html->link(substr($answers['Answer']['body'], 0, 60) . " ...",
-										array('action' => 'view', $answers['Answer']['id_question']));?></li>
+					<?php foreach ($answers as $answer): ?>
+						<li><?php echo $this->Html->link(substr($answer['Answer']['body'], 0, 60) . " ...",
+										array('action' => 'view', $answer['Answer']['id_question']));?></li>
 					<?php endforeach; ?>
 
 					</ul>
 				</div>
 			</div>
-
+		
 			<div class="right">
 			<?php $session_id = $this->Session->read('User.id'); 
-			$session_name = $this->Session->read('User.name'); 
+			$session_name = $this->Session->read('User.name');
 			?>
-				<?php if($session_name) { ?>
+				<?php if(@$session_name) { ?>
 				<div class="box preguntaya">
 					<h2><?php echo __('¡Envía tu pregunta!')?></h2>
 					<?php
@@ -91,4 +83,5 @@
 						<?php endforeach; ?>
 					</ol>
 				</div>
+			</div>
 			</div>

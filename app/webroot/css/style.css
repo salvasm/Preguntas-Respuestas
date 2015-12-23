@@ -9,6 +9,7 @@ a, a:focus, a:focus * { outline: none !important; -moz-outline-style: none !impo
 
 body {
   margin: 0;
+  height: 100%;
   font-size: 16px;
   font-family: 'Montserrat', sans-serif;
 }
@@ -28,6 +29,8 @@ h1 {
   margin: 0 auto;
   width: 960px;
   height: 100%;
+  position: relative;
+  
 }
 @media all and (max-width: 600px) {
   .wrap {
@@ -39,7 +42,7 @@ h1 {
 
 .header {
   margin-top: 15px;
-  width: auto;
+  width: 100%;
   background-image: url('../img/logo_grande.png');
   background-repeat: no-repeat;
   background-size: 32%;
@@ -79,8 +82,8 @@ h1 {
   color: #3A5795;
 }
 .search {
-  float: right;
-  position: relative;
+	position: relative;
+	float: right;
 }
 .search input {
   width: 220px;
@@ -101,7 +104,6 @@ h1 {
   width: auto;
   height: 35px;
   font-size: 20px;
-  position: relative;
   background: -webkit-linear-gradient(black, #3A5795);
   background: -moz-linear-gradient(black, #3A5795);
   background: -o-linear-gradient(black, #3A5795);
@@ -184,10 +186,9 @@ h1 {
 /* CONTENIDO -> INICIO */
 
 .content {
-  overflow: hidden;
-  margin-bottom: 10px;
-  min-height: 650px;
-  position: relative;
+	position: relative;
+	float: left;
+	width: 100%;
 }
 .box {
   margin: 15px 0 15px;
@@ -197,7 +198,7 @@ h1 {
   border-radius: 5px;
   border: 1px solid;
   box-shadow: 2px 2px 8px #000000;
-  width: 99%;
+  width: 99.7%;
 }
 
 .box.preguntaya {
@@ -230,12 +231,17 @@ label {
 	display: none;
 }
 
-.box.preguntaya input, .box.preguntaya textarea, select  {
+.box.preguntaya input, .box.preguntaya textarea, select {
   display: block;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
   margin-bottom: 10px;
   border: 1px solid #000;
+  font-size: 14px;
+}
+
+select {
+	width: 87%;
 }
 
 .box h2 {
@@ -317,7 +323,7 @@ label {
     border-radius: 3px;
   }
 }
-#questions a {
+#questions a, #answers a {
   color: black;
   display: block;
   text-decoration: none;
@@ -447,7 +453,6 @@ label {
 }
 .question {
   float: left;
-  position: relative;
   width: 75%;
   border: 1px solid;
   -webkit-border-radius: 5px;
@@ -460,6 +465,23 @@ label {
   float: right;
   margin: 5px;
 }
+
+.comment_options input {
+	margin: 0px;
+	padding: 0;
+}
+
+.comment_options p {
+	font-size: 25px;
+	margin: 0;
+	padding: 0;
+}
+
+.comment_options {
+	text-align: center;
+	float: right;
+}
+
 #responder_comments {
   margin: 10px auto;
   display: block;
@@ -517,7 +539,6 @@ textarea #responder_comments {
 
 .footer {
   text-align: center;
-  position: relative;
   bottom: 0;
   margin: 0 auto;
   width: 960px;
@@ -541,11 +562,16 @@ textarea #responder_comments {
 /* MESSAGES -> INICIO */
 
 .message {
+	float: left;
+	width: 918px;
 	margin-top: 10px;
 	padding: 10px 20px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+	color: #AA6708;
+	border: 1px #AA6708 solid;
+	background-color: #FCF8E3;
 } 
 
 .success {
@@ -581,4 +607,23 @@ textarea #responder_comments {
 
 .spanish {
 	background-image: url('../img/flags/Spain.png');
+}
+
+.form_basic {
+	text-align: center;
+	padding: 20px 25px;
+}
+
+.form_basic input {
+	margin-bottom: 10px;
+}
+
+.date select {
+	display: inline;
+	width: auto;
+}
+
+.background_button {
+	background-color: #91AEEC;
+	text-align: center;
 }

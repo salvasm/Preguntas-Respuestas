@@ -4,54 +4,34 @@
 class QuestionsController extends AppController {
 	
     public $helpers = array('Html', 'Form', 'Flash');
-    public $components = array('Flash');
+    public $components = array('Flash', 'Session', 'Cookie');
 
 	public function beforeFilter() {
 		parent::beforeFilter();
 		// Allow all users to...
-		$this->Auth->allow('index');
+		$this->Auth->allow('index', 'search', 'view', 'like');
+		
+		$session_name = $this->Session->read('User.name');
+		$this->Cookie->name = $session_name;
 	}
 	
-    public function index($languaje = 'es') {
+    public function index() {
         $this->set('questions', $this->Question->find('all'));
-		// Idioma
-		Configure::write('Config.language', $languaje);
 		
 		// Load comentarios para pregunta según ID
 		$this->loadModel('Answer');
 		$this->loadModel('User');
-
-		$answers = $this->Answer->find('all');
-		$this->set('answer', $answers);
 		
-		// Últimas 5 respuestas
-		$recentAnswers = $this->Answer->find('all', array('limit' => 5, 'order' => 'Answer.date DESC'));
-		$this->set('recentAnswer', $recentAnswers);
-
-		// JOIN de QUESTIONS & ANSWERS
+		// LAST 5 ANSWERS...
+		$answers = $this->Answer->find('all', array('limit' => 5, 'order' => 'id DESC'));
+		$this->set('answers', $answers);
 		
-		$options['fields'] = array(
-			'Question.*', 
-			'Answer.id_question',
-			'COUNT(Answer.id_question) AS num_comments'
-		);
-		$options['joins'] = array(
-			array(
-				'table' => 'answers',
-				'alias' => 'Answer',
-				'type' => 'LEFT',
-				'foreignKey' => TRUE,
-				'conditions' => array('Question.id = Answer.id_question')
-			)
-		);
-		$options['group'] = array('Question.id');
-		$options['order'] = 'Question.created DESC';
-		$options['limit'] = 5;
-		$joinQuestionsAnswers = $this->Question->find('all', $options);
+		// HasMany -> QUESTIONS -> ANSWERS...
+			
+		$questions = $this->Question->find('all', array('limit' => 5, 'order' => 'id DESC'));
+		$this->set('questions', $questions);
 		
-		$this->set('joinQuestionsAnswers', $joinQuestionsAnswers);
-		
-		// FIN JOIN de QUESTIONS & ANSWERS
+		// FIN HasMany -> QUESTIONS -> ANSWERS
 		
 		
 		// JOIN de USUARIOS & ANSWERS
@@ -83,16 +63,76 @@ class QuestionsController extends AppController {
 			
 		// Funcion para enviar pregunta
 		if ($this->request->is('post')) {
-			//Added this line
 			$this->request->data['Question']['id_user'] = $this->Auth->user('id');
 			if ($this->Question->save($this->request->data)) {
 				$this->Flash->success(__('Your question has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			}
 		}
+		
+		// funcion para enviar busquedas
+		
+		
+			
     }
 	
-    public function view($id) {
+	public function search() {
+		@$query = $this->request->query['search'];
+			
+			if ($query) {
+
+			//$this->Question->findById($id);
+			
+			//$this->set($query, $this->request->query['search']);
+			$conditions = array(
+				'conditions' => array(
+					'or' => array(
+						'Question.title LIKE' => "%$query%"
+						)
+					)
+				);
+			
+			$results = $this->Question->find('all', $conditions);
+			$this->set('results', $results);
+				if (!$results) {
+					$this->Flash->default(__('No hay resultados para: ') . $query);
+					return $this->redirect(array('controller' => 'questions', 'action' => 'index'));
+				}
+
+			}else {
+				return $this->redirect(array('controller' => 'questions', 'action' => 'index'));
+			}
+	}
+	
+	public function like($id) {
+		if (!$id) {
+            throw new NotFoundException(__('Invalid request for like'));
+        }
+		
+		$this->loadModel('Answer');
+		$like = $this->Answer->findById($id);
+		$this->set('like', $like);
+		
+		if (!$this->Cookie->read('User.like' . $id)){
+			
+			$this->Answer->id = $id;
+			$this->Answer->updateAll(array(
+				'Answer.likes' => 'Answer.likes + 1'),
+				array('Answer.id' => $id));
+			
+			$name = $this->Cookie->read('name');
+			
+			$this->Cookie->write('User.like' . $id, $id);
+			//$this->Session->write('User.like' . $id, $id);
+			$this->Flash->success(__('Like correctamente!'));		
+			$this->redirect(array('controller' => 'questions', 'action' => 'view/' . $like['Answer']['id_question']));
+		} else {
+			$this->Flash->error(__('No puedes votar más de una vez cada respuesta.'));		
+			$this->redirect(array('controller' => 'questions', 'action' => 'view/' . $like['Answer']['id_question']));
+		}
+	}
+
+    public function view($id) {		
         if (!$id) {
             throw new NotFoundException(__('Invalid question'));
         }
@@ -125,13 +165,7 @@ class QuestionsController extends AppController {
 			}
 		}
 		
-    }
-	
-	public function like($id){
-		
-	}
-
-	
+    }	
 	
 	public function add() {
 		if ($this->request->is('post')) {
@@ -191,7 +225,7 @@ public function delete($id) {
 public function isAuthorized($user) {
     // All registered users can add questions
     // if ($this->action === 'add') {
-	if (in_array($this->action, array('add', 'index', 'view', 'profile'))) {    
+	if (in_array($this->action, array('add', 'index', 'view', 'profile', 'search'))) {    
 		return true;
     }
 

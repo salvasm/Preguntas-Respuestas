@@ -56,7 +56,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 					<tr>
 						<td class="spanish"><?php echo $this->Html->link('español', array('action'=>'index','es')); ?></td>
 						<td class="english"><?php echo $this->Html->link('english', array('action'=>'index','en')); ?></td>
-						<td>    <input type="text" placeholder="<?php echo __('Buscar...')?>" /> </td>
+						<td>    
+							<?php
+								echo $this->Form->create('question', array('action' => 'search', 'type' => 'get'));
+								echo $this->Form->input('search', array('placeholder' => __('Buscar...')));
+								echo $this->Form->end();
+							?>
+						<!--<input type="text" placeholder="<?php echo __('Buscar...')?>" /> </td>-->
 					</tr>
 				</table>
 				
@@ -66,8 +72,13 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		<!--MENU-->
 		<div class="menu">
 		
-			<?php $session_id = $this->Session->read('User.id'); 
+			<?php 
+			$session_id = $this->Session->read('User.id'); 
 			$session_name = $this->Session->read('User.name'); 
+			//$session_lang = $this->Session->read('User.lang');
+			
+			//Configure::write('Config.language', $session_lang);
+			
 			?>
 			<?php if(!$session_id) { ?>
 			<ul>
@@ -84,7 +95,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 							'/users/add',
 							array('class' => 'boton')
 						); ?>
-				</li>
+				</li>				
 			</ul>
 			<?php } else { ?>
 				<ul>
@@ -96,11 +107,10 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 						); ?>
 					</li>
 					<li>
-							<?php echo $this->Html->link(
-								 __('Inicio'),
-								'/questions/index',
-								array('class' => 'boton')
-							); ?>
+							<?php 
+							echo $this->Html->link(__('Inicio'), array('controller' => 'questions', 'action'=>'index'), array('class' => 'boton'))
+							
+							; ?>
 					</li>
 					<span class="data_user"><?php echo __('Bienvenido')?> <?php echo $session_name; ?></span>
 				</ul>

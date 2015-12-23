@@ -33,6 +33,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 // app/Controller/AppController.php
 
+/*
 function beforeFilter() {
     $locale = Configure::read('Config.language');
     if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath)) {
@@ -40,11 +41,11 @@ function beforeFilter() {
         $this->viewPath = $locale . DS . $this->viewPath;
     }
 }
-
+*/
 public $components = array(
     'Flash',
     'Auth' => array(
-        'loginRedirect' => array('controller' => 'questions', 'action' => 'index'),
+        'loginRedirect' => array('controller' => '../questions', 'action' => 'index'),
         'logoutRedirect' => array(
             'controller' => 'questions',
             'action' => 'index'

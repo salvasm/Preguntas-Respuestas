@@ -1,9 +1,6 @@
 <!-- File: /app/View/Questions/index.ctp -->
 
-<h1>Blog user</h1>
-<p><?php echo $this->Html->link('Add User', array('action' => 'add')); ?></p>
-<p><?php echo $this->Html->link('Logout', array('action' => 'logout')); ?></p>
-<table>
+<!-- <table>
     <tr>
         <th>Id</th>
         <th>Username</th>
@@ -11,7 +8,7 @@
         <th>Birthday</th>
     </tr>
 
-<!-- Here's where we loop through our $posts array, printing out post info -->
+Here's where we loop through our $posts array, printing out post info
 
     <?php foreach ($users as $user): ?>
     <tr>
@@ -22,4 +19,4 @@
     </tr>
     <?php endforeach; ?>
 
-</table>
+</table> -->

@@ -7,6 +7,10 @@ class AnswersController extends AppController {
 
 	public function index() {
         $this->set('answers', $this->Answer->find('all'));
+		
+		$this->loadModel('Question');
+		$question = $this->Question->find('all');
+		$this->set('question', $question);
 	}
 	
 	public function add() {

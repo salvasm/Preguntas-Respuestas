@@ -11,6 +11,7 @@ class UsersController extends AppController {
 		// Allow users to register and logout.
 		$this->Auth->allow('add', 'logout');
 	}
+
 	
 	public function login() {
 		AuthComponent::user('id');
@@ -19,20 +20,10 @@ class UsersController extends AppController {
 		if ($this->request->is('post')) {
 			
 			if ($this->Auth->login()) {
-				//$login = $this->User->findByUsername($this->request->data['User']['username']);
-				
-				//Setting Session Variables:
-				//$this -> Session -> write( "name", $login);
-
-				//Retrieving Session Variables:
-				//echo $this -> Session -> read("name");
-				
-				
-				// From inside a controller
 				$this->Session->write('User.id', $this->Auth->user('id'));
 				$this->Session->write('User.name', $this->Auth->user('username'));
-				
-				return $this->redirect($this->Auth->redirectUrl());
+
+				return $this->redirect('../questions/index');
 			}
 			$this->Flash->error(__('Invalid username or password, try again'));
 		}
@@ -59,10 +50,12 @@ class UsersController extends AppController {
 
     public function add() {
         if ($this->request->is('post')) {
-            $this->User->create();
+  
+			$this->User->create();
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('The user has been saved'));
-                return $this->redirect(array('action' => 'index'));
+                return $this->redirect('../questions/index');
+				$this->redirect('/orders/thanks');
             }
             $this->Flash->error(
                 __('The user could not be saved. Please, try again.')

@@ -129,6 +129,26 @@ msgstr "Send question"
 msgid "Usuarios más activos"
 msgstr "Most active users"
 
+#: /View/Questions/view.ctp:20
+msgid "Deja tu respuesta"
+msgstr "Write your answer"
+
+#: /View/Questions/view.ctp:25
+msgid "Categoria: "
+msgstr "Category: "
+
+#: /View/Questions/view.ctp:33
+msgid "Escribe tu respuesta..."
+msgstr "Write your answer..."
+
+#: /View/Questions/view.ctp:34
+msgid "Enviar respuesta"
+msgstr "Send answer"
+
+#: /View/Questions/view.ctp:40
+msgid "Respuestas"
+msgstr "Answers"
+
 #: /View/Users/add.ctp:5
 msgid "Add User"
 msgstr ""
