@@ -1,7 +1,7 @@
 # Preguntas-Respuestas
 
 First project using CakePHP.
-Little social network to ask and asnwer people doubts. (Like Yahoo Answers)
+Little social network to ask and answer people doubts. (Like Yahoo Answers)
 
 * Register/Login user
 * Add/edit/remove questions
